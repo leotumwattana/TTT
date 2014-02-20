@@ -12,40 +12,42 @@
     <main role="main">
       <div id="game-board" data-ng-app>
         
-        <div id="cell-0" class="cell top left x">
-          <span class="piece">x</span>
-        </div>
+        <div data-ng-controller="BoardController">
+          <div id="cell-0" class="cell top left {{ board[0] }}">
+            <span class="piece">{{ board[0] }}</span>
+          </div>
 
-        <div id="cell-1" class="cell top center o">
-          <span class="piece">o</span>
-        </div>
+          <div id="cell-1" class="cell top center {{ board[1] }}">
+            <span class="piece">{{ board[1] }}</span>
+          </div>
 
-        <div id="cell-2" class="cell top right x">
-          <span class="piece">x</span>
-        </div>
+          <div id="cell-2" class="cell top right {{ board[2] }}">
+            <span class="piece">{{ board[2] }}</span>
+          </div>
 
-        <div id="cell-3" class="cell middle left o">
-          <span class="piece">o</span>
-        </div>
+          <div id="cell-3" class="cell middle left {{ board[3] }}">
+            <span class="piece">{{ board[3] }}</span>
+          </div>
 
-        <div id="cell-4" class="cell middle center x">
-          <span class="piece">x</span>
-        </div>
+          <div id="cell-4" class="cell middle center {{ board[4] }}">
+            <span class="piece">{{ board[4] }}</span>
+          </div>
 
-        <div id="cell-5" class="cell middle right x">
-          <span class="piece">x</span>
-        </div>
+          <div id="cell-5" class="cell middle right {{ board[5] }}">
+            <span class="piece">{{ board[5] }}</span>
+          </div>
 
-        <div id="cell-6" class="cell bottom left o">
-          <span class="piece">o</span>
-        </div>
+          <div id="cell-6" class="cell bottom left {{ board[6] }}">
+            <span class="piece">{{ board[6] }}</span>
+          </div>
 
-        <div id="cell-7" class="cell bottom center x">
-          <span class="piece">x</span>
-        </div>
+          <div id="cell-7" class="cell bottom center {{ board[7] }}">
+            <span class="piece">{{ board[7] }}</span>
+          </div>
 
-        <div id="cell-8" class="cell bottom right x">
-          <span class="piece">x</span>
+          <div id="cell-8" class="cell bottom right {{ board[8] }}">
+            <span class="piece">{{ board[8] }}</span>
+          </div>
         </div>
 
       </div>
@@ -53,5 +55,6 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     <script src="/js/application.js" type="text/javascript"></script>
+    <script src="/js/controllers.js" type="text/javascript"></script>
   </body>
 </html>
