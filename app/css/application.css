@@ -1,1 +1,46 @@
+@import url(http://fonts.googleapis.com/css?family=Exo:900);
+
 body { background-image: url(/img/backgroundtexture.png); }
+
+#game-board {
+  width: 70vw;
+  height: 70vw;
+  margin: 80px auto;
+}
+
+.cell {
+  width:  33.3333333333333333%;
+  height: 33.3333333333333333%;
+  float: left;
+  border: 3px dashed #ccc;
+  display: table;
+  margin: 0;
+}
+
+.cell p {
+  font-family: 'Exo', sans-serif;
+  font-size: 13vw;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.top { border-top: 0; border-bottom: 0; }
+.bottom { border-bottom: 0; border-top: 0;}
+.left { border-left: 0; border-right: 0;}
+.right { border-right: 0; }
+.center { border-right: 0; }
+
+.x { color: hsla(355, 63%, 56%, 0.9); }
+.o { color: hsla(176, 55%, 56%, 0.9); }
+
+@media only screen and (min-width: 40.063em) {
+  #game-board {
+    width: 40vw;
+    height: 40vw;
+  }
+  .cell p {
+    font-size: 11vw;
+  }
+}
