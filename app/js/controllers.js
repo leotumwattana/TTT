@@ -3,6 +3,11 @@ var TTT = angular.module('TTT', []);
 TTT.controller('BoardController', ['$scope', function($scope) {
   $scope.board = [];;
 
+  init = function() {
+    $scope.turn = "o";
+  }
+  init();
+
   $scope.newBoard = function() {
     $scope.board = [];
   }
@@ -14,7 +19,17 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   }
 
   $scope.placePiece = function(position) {
-    console.log("Placing piece on: " + position)
-    $scope.board[position] = "x"
+    console.log("Placing piece on: " + position);
+    $scope.board[position] = $scope.turn;
+    swapTurn();
   }
+
+  swapTurn = function() {
+    if ($scope.turn == "o") {
+      $scope.turn = "x";
+    } else {
+      $scope.turn = "o";
+    }
+  }
+
 }]);
