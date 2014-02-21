@@ -10,6 +10,13 @@
   </head>
   <body>
     <main role="main" data-ng-app="TTT">
+      <header>
+        <h1>
+         <span class="tic">Tic</span>
+         <span class="tac">Tac</span>
+         <span class="toe">Toe</span>
+        </h1>
+      </header>
       <div data-ng-controller="BoardController">
         <div id="game-board">
           <div id="cell-0" class="cell top left {{ board[0] }}" 
