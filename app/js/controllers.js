@@ -1,14 +1,14 @@
 var TTT = angular.module('TTT', []);
 
 TTT.controller('BoardController', ['$scope', function($scope) {
-  $scope.board = [];;
+  $scope.board = [];
 
-  init = function() {
+  var init = function() {
     $scope.turn = "o";
   }
   init();
 
-  $scope.newBoard = function() {
+  $scope.resetBoard = function() {
     $scope.board = [];
   }
 
@@ -34,7 +34,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
     }
   }
 
-  swapTurn = function() {
+  var swapTurn = function() {
     if ($scope.turn === "o") {
       $scope.turn = "x";
     } else {
@@ -42,7 +42,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
     }
   }
 
-  checkWin = function() {
+  var checkWin = function() {
     checkSets = [[0,1,2],[3,4,5],[6,7,8],
                  [0,3,6],[1,4,7],[2,5,8],
                  [0,4,8],[2,4,6]];
@@ -60,10 +60,11 @@ TTT.controller('BoardController', ['$scope', function($scope) {
     return win;
   }
 
-  isBoardFull = function() {
+  var isBoardFull = function() {
     return $scope.board.filter(function(value){
       return value !== undefined;
     }).length === 9;
   }
-
 }]);
+
+  
