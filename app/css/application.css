@@ -19,7 +19,7 @@ body { background-image: url(/img/backgroundtexture.png); }
 
 .piece {
   font-family: 'Exo', sans-serif;
-  font-size: 13vw;
+  font-size: 12vw;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
@@ -41,6 +41,6 @@ body { background-image: url(/img/backgroundtexture.png); }
     height: 40vw;
   }
   .cell p {
-    font-size: 11vw;
+    font-size: 10vw;
   }
 }
