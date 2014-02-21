@@ -1,13 +1,10 @@
 var TTT = angular.module('TTT', []);
 
 TTT.controller('BoardController', ['$scope', function($scope) {
-  $scope.board = ["o", "o", "x",
-                    "o", "x", " ",
-                    "x", " ", "o"];;
+  $scope.board = [];;
 
   $scope.newBoard = function() {
     $scope.board = [];
-    console.log("What?");
   }
 
   $scope.getSplashBoard = function() {
@@ -16,7 +13,8 @@ TTT.controller('BoardController', ['$scope', function($scope) {
                     "x", " ", "o"];
   }
 
-  $scope.wha = function() {
-    console.log("Wha?")
+  $scope.placePiece = function(position) {
+    console.log("Placing piece on: " + position)
+    $scope.board[position] = "x"
   }
 }]);
