@@ -37,9 +37,18 @@ body {
 .x { color: hsla(355, 63%, 56%, 0.9); }
 .o { color: hsla(176, 55%, 56%, 0.9); }
 
-.tic { color: hsla(176, 55%, 56%, 0.9); }
-.tac { color: hsla(355, 63%, 56%, 0.9); }
-.toe { color: hsla(176, 55%, 56%, 0.9); }
+.tic { 
+  color: hsla(176, 55%, 56%, 0.9); 
+  text-shadow: 0px 2px 0px hsla(176, 55%, 45%, 0.9);
+}
+.tac, #win-message.x { 
+  color: hsla(355, 63%, 56%, 0.9); 
+  text-shadow: 0px 2px 0px hsla(355, 63%, 45%, 0.9);
+}
+.toe, #win-message.o { 
+  color: hsla(176, 55%, 56%, 0.9); 
+  text-shadow: 0px 2px 0px hsla(176, 55%, 45%, 0.9);
+}
 
 header {
   text-align: center;

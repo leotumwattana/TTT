@@ -82,6 +82,9 @@
             </span>
           </div>
         </div>
+        <div id="win-message" class="{{turn}}" ng-show="gameOver">
+          {{turn | uppercase}} WON!
+        </div>
         <footer>
           <button ng-show="gameOver" 
                   ng-click="resetBoard()">
