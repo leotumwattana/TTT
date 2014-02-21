@@ -5,11 +5,13 @@ TTT.controller('BoardController', ['$scope', function($scope) {
 
   var init = function() {
     $scope.turn = "o";
+    $scope.gameOver = false;
   }
   init();
 
   $scope.resetBoard = function() {
     $scope.board = [];
+    $scope.gameOver = false;
   }
 
   $scope.getSplashBoard = function() {
@@ -24,9 +26,14 @@ TTT.controller('BoardController', ['$scope', function($scope) {
     if ($scope.board[position] == null) {
 
       $scope.board[position] = $scope.turn;
-      swapTurn();
 
-      console.log("win? " + checkWin());
+      if (isWon() || isBoardFull()) {
+        $scope.gameOver = true;
+      } else {
+        swapTurn();
+      }
+
+      console.log("win? " + isWon());
       console.log("Full? " + isBoardFull());
 
     } else {
@@ -42,7 +49,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
     }
   }
 
-  var checkWin = function() {
+  var isWon = function() {
     checkSets = [[0,1,2],[3,4,5],[6,7,8],
                  [0,3,6],[1,4,7],[2,5,8],
                  [0,4,8],[2,4,6]];

@@ -83,7 +83,13 @@
           </div>
         </div>
         <footer>
-          <button ng-click="resetBoard()">Play again</button>
+          <button ng-show="gameOver" 
+                  ng-click="resetBoard()">
+            Play again
+          </button>
+          <h1 class="turn {{turn}}" ng-hide="gameOver">
+            {{turn | uppercase}}'s turn
+          </h1>
         </footer>
       </div>
     </main>
