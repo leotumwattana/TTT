@@ -60,4 +60,10 @@ TTT.controller('BoardController', ['$scope', function($scope) {
     return win;
   }
 
+  isBoardFull = function() {
+    return $scope.board.filter(function(value){
+      return value !== undefined;
+    }).length === 9;
+  }
+
 }]);
