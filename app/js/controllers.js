@@ -25,7 +25,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   }
 
   swapTurn = function() {
-    if ($scope.turn == "o") {
+    if ($scope.turn === "o") {
       $scope.turn = "x";
     } else {
       $scope.turn = "o";
@@ -43,7 +43,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
       b = $scope.board[positions[1]];
       c = $scope.board[positions[2]];
 
-      if (a == b && b == c && a != null) {
+      if (a === b && b === c && a != null) {
         win = true;
       }
     });
