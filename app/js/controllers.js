@@ -19,9 +19,19 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   }
 
   $scope.placePiece = function(position) {
-    $scope.board[position] = $scope.turn;
-    swapTurn();
-    console.log("win? " + checkWin());
+
+    // check if position is take
+    if ($scope.board[position] === null) {
+
+      $scope.board[position] = $scope.turn;
+      swapTurn();
+
+      console.log("win? " + checkWin());
+      console.log("Full? " + isBoardFull());
+      
+    } else {
+      console.log("Position taken!");
+    }
   }
 
   swapTurn = function() {
