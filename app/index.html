@@ -82,15 +82,15 @@
             </span>
           </div>
         </div>
-        <div id="win-message" class="{{turn}}" ng-show="gameOver">
+        <div id="win-message" class="{{turn}}" data-ng-show="gameOver">
           {{turn | uppercase}} WON!
         </div>
         <footer>
-          <button ng-show="gameOver" 
-                  ng-click="resetBoard()">
+          <button data-ng-show="gameOver" 
+                  data-ng-click="resetBoard()">
             Play again
           </button>
-          <h1 class="turn {{turn}}" ng-hide="gameOver">
+          <h1 class="turn {{turn}}" data-ng-hide="gameOver">
             {{turn | uppercase}}'s turn
           </h1>
         </footer>
