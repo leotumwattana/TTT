@@ -6,6 +6,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   var init = function() {
     $scope.turn = "o";
     $scope.gameOver = false;
+    $scope.gameOverMessage = "";
   }
   init();
 
@@ -28,13 +29,15 @@ TTT.controller('BoardController', ['$scope', function($scope) {
       $scope.board[position] = $scope.turn;
 
       if (isWon() || isBoardFull()) {
+        if (isWon()) {
+          $scope.gameOverMessage = $scope.turn.toUpperCase() + " WON!";
+        } else {
+          $scope.gameOverMessage = "It's a tie!";
+        }
         $scope.gameOver = true;
       } else {
         swapTurn();
       }
-
-      console.log("win? " + isWon());
-      console.log("Full? " + isBoardFull());
 
     } else {
       console.log("Position taken!");
