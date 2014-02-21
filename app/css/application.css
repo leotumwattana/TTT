@@ -1,8 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Exo:900);
+@import url(http://fonts.googleapis.com/css?family=Exo:600,900);
 
 body { 
   font-family: 'Exo', sans-serif;
-  background-image: url(/img/backgroundtexture.png); 
+  font-weight: 900;
+  background-image: url(/img/backgroundtexture.png);
 }
 
 #game-board {
@@ -76,16 +77,17 @@ footer h1.o {
 }
 
 button {
-  -moz-border-radius:5px;
-  -webkit-border-radius:5px;
-  border-radius:5px;
-  color: hsla(176, 100%, 90%, 1.0);
   font-size: 140%;
-  padding: 15px 25px;
+  font-weight: 600;
+  color: hsla(176, 100%, 90%, 1.0);
   border: 0;
+  padding: 15px 25px;
   background-color: hsla(176, 55%, 56%, 0.9);
   -webkit-box-shadow: 0 5px 0 0 hsla(176, 55%, 38%, 0.9);
   box-shadow: 0 5px 0 0 hsla(176, 55%, 38%, 0.9);
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
 }
 
 button:hover {
