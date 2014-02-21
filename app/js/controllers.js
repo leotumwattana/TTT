@@ -1,14 +1,22 @@
-function BoardController($scope) {
+var TTT = angular.module('TTT', []);
 
-  $scope.board = [];
+TTT.controller('BoardController', ['$scope', function($scope) {
+  $scope.board = ["o", "o", "x",
+                    "o", "x", " ",
+                    "x", " ", "o"];;
 
-  function newBoard() {
+  $scope.newBoard = function() {
     $scope.board = [];
+    console.log("What?");
   }
 
-  function splashBoard() {
+  $scope.getSplashBoard = function() {
     $scope.board = ["o", "o", "x",
                     "o", "x", " ",
                     "x", " ", "o"];
   }
-}
+
+  $scope.wha = function() {
+    console.log("Wha?")
+  }
+}]);
