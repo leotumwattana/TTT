@@ -1,6 +1,7 @@
 {
-  "name": "ttt",
+  "name": "TTT",
   "version": "0.0.1",
+  "engines": { "node": "0.10.24"},
   "description": "AngularJS Tic Tac Toe",
   "main": "web.js",
   "scripts": {
