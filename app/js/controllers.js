@@ -50,11 +50,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   }
 
   var swapTurn = function() {
-    if ($scope.turn === O) {
-      $scope.turn = X;
-    } else {
-      $scope.turn = O;
-    }
+    $scope.turn = ($scope.turn === O) ? X : O;
   }
 
   var isWon = function() {
