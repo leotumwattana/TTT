@@ -7,14 +7,14 @@ body {
 }
 
 #game-board {
-  width: 70vw;
-  height: 70vw;
+  width: 300px;
+  height: 300px;
   margin: 40px auto;
 }
 
 .cell {
-  width:  33.3333333333333333%;
-  height: 33.3333333333333333%;
+  width:  100px;
+  height: 100px;
   float: left;
   border: 3px dashed #ccc;
   display: table;
