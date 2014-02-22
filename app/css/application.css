@@ -113,6 +113,10 @@ button:active {
     width: 40vw;
     height: 40vw;
   }
+  .cell {
+    width:  33.3333333333333%;
+    height: 33.3333333333333%;
+  }
   .cell p {
     font-size: 10vw;
   }
