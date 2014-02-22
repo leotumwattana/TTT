@@ -1,10 +1,15 @@
 var TTT = angular.module('TTT', []);
 
 TTT.controller('BoardController', ['$scope', function($scope) {
+
+  // Symbols for pieces
+  var O = "o";
+  var X = "x";
+
   $scope.board = [];
 
   var init = function() {
-    $scope.turn = "o";
+    $scope.turn = O;
     $scope.gameOver = false;
     $scope.gameOverMessage = "";
   }
@@ -16,9 +21,9 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   }
 
   $scope.getSplashBoard = function() {
-    $scope.board = ["o", "o", "x",
-                    "o", "x", " ",
-                    "x", " ", "o"];
+    $scope.board = [O, O, X,
+                    O, X, " ",
+                    X, " ", O];
   }
 
   $scope.placePiece = function(position) {
@@ -45,10 +50,10 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   }
 
   var swapTurn = function() {
-    if ($scope.turn === "o") {
-      $scope.turn = "x";
+    if ($scope.turn === O) {
+      $scope.turn = X;
     } else {
-      $scope.turn = "o";
+      $scope.turn = O;
     }
   }
 
