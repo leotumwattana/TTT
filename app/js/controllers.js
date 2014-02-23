@@ -1,4 +1,16 @@
-var TTT = angular.module('TTT', []);
+var TTT = angular.module('TTT', ['ngRoute']);
+
+TTT.config(['$routeProvider', 
+  function($routeProvider) {
+    $routeProvider.
+      when('/', {
+        templateUrl: 'partials/game-board.html',
+        controller: 'BoardController'
+      }).
+      otherwise({
+        redirectTo: '/'
+      });
+  }]);
 
 TTT.controller('BoardController', ['$scope', function($scope) {
 
