@@ -4,6 +4,10 @@ TTT.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
+        templateUrl: 'partials/splash.html',
+        controller: 'BoardController'
+      }).
+      when('/start', {
         templateUrl: 'partials/game-board.html',
         controller: 'BoardController'
       }).
