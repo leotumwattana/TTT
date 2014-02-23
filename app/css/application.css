@@ -19,12 +19,12 @@ body {
   border: 3px dashed #ccc;
   display: table;
   margin: 0;
+  text-align: center;
 }
 
 .piece {
   font-size: 500%;
   display: table-cell;
-  text-align: center;
   vertical-align: middle;
   text-transform: uppercase;
 }
