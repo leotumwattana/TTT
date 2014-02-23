@@ -21,6 +21,8 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   // Symbols for pieces
   var O = "o";
   var X = "x";
+  $scope.X = X;
+  $scope.O = O;
 
   $scope.board = [];
 
