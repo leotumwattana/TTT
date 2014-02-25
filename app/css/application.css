@@ -68,6 +68,9 @@ body {
 .x { color: hsla(355, 63%, 56%, 0.9); }
 .o { color: hsla(176, 55%, 56%, 0.9); }
 
+.fade.x { color: hsla(355, 63%, 56%, 0.2); }
+.fade.o { color: hsla(176, 55%, 56%, 0.2); }
+
 .teal, #win-message.o { 
   color: hsla(176, 55%, 56%, 0.9); 
   text-shadow: 0px 2px 0px hsla(176, 55%, 45%, 0.9);

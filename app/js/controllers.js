@@ -25,6 +25,7 @@ TTT.controller('BoardController', ['$scope', function($scope) {
   $scope.O = O;
 
   $scope.board = [];
+  $scope.fade = [];
 
   var init = function() {
     $scope.turn = O;
@@ -35,13 +36,14 @@ TTT.controller('BoardController', ['$scope', function($scope) {
 
   $scope.resetBoard = function() {
     $scope.board = [];
+    $scope.fade = [];
     $scope.gameOver = false;
   }
 
   $scope.getSplashBoard = function() {
-    $scope.board = [O, O, X,
-                    O, X, " ",
-                    X, " ", O];
+    $scope.board = [ O,   O,   X,
+                     O,   X, " ",
+                     X, " ",   O];
   }
 
   $scope.placePiece = function(position) {
@@ -83,10 +85,21 @@ TTT.controller('BoardController', ['$scope', function($scope) {
       c = $scope.board[positions[2]];
 
       if (a === b && b === c && a != null) {
+        setFade(positions);
         win = true;
+        return false;
       }
     });
     return win;
+  }
+
+  var setFade = function(winningPositions) {
+    for ( var i = 0; i < 9; i++ ) {
+      if (i != winningPositions[0] && i != winningPositions[1] && i != winningPositions[2]) {
+        $scope.fade[i] = true;
+      }
+    }
+    console.log($scope.fade);
   }
 
   var isBoardFull = function() {
