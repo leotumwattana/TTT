@@ -48,7 +48,8 @@
           $scope.game.counter += 1;
           if (isWon() || isBoardFull()) {
             if (isWon()) {
-              $scope.game.gameOverMessage = getMark(-1).toUpperCase() + " WON!";
+              $scope.game.counter -= 1;
+              $scope.game.gameOverMessage = getMark().toUpperCase() + " WON!";
             } else {
               $scope.game.gameOverMessage = "It's a tie!";
             }
