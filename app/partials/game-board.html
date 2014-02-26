@@ -8,78 +8,77 @@
 </header>
 
 <div id="game-board">
-  <div id="cell-0" ng-class="{ fade: fade[0] }" class="cell top left {{ board[0] }}" 
+  <div id="cell-0" class="cell top left {{ game.board[0] }}" 
     data-ng-click="placePiece(0)">
     <span class="piece">
-      {{ board[0] }}
+      {{ game.board[0] }}
     </span>
   </div>
 
-  <div id="cell-1" ng-class="{ fade: fade[1] }" class="cell top center {{ board[1] }}" 
+  <div id="cell-1" class="cell top center {{ game.board[1] }}" 
     data-ng-click="placePiece(1)">
     <span class="piece">
-      {{ board[1] }}
+      {{ game.board[1] }}
     </span>
   </div>
 
-  <div id="cell-2" ng-class="{ fade: fade[2] }" class="cell top right {{ board[2] }}" 
+  <div id="cell-2" class="cell top right {{ game.board[2] }}" 
     data-ng-click="placePiece(2)">
     <span class="piece">
-      {{ board[2] }}
+      {{ game.board[2] }}
     </span>
   </div>
 
-  <div id="cell-3" ng-class="{ fade: fade[3] }" class="cell middle left {{ board[3] }}" 
+  <div id="cell-3" class="cell middle left {{ game.board[3] }}" 
     data-ng-click="placePiece(3)">
     <span class="piece">
-      {{ board[3] }}
+      {{ game.board[3] }}
     </span>
   </div>
 
-  <div id="cell-4" ng-class="{ fade: fade[4] }" class="cell middle center {{ board[4] }}" 
+  <div id="cell-4" class="cell middle center {{ game.board[4] }}" 
     data-ng-click="placePiece(4)">
     <span class="piece">
-      {{ board[4] }}
+      {{ game.board[4] }}
     </span>
   </div>
 
-  <div id="cell-5" ng-class="{ fade: fade[5] }" class="cell middle right {{ board[5] }}" 
+  <div id="cell-5" class="cell middle right {{ game.board[5] }}" 
     data-ng-click="placePiece(5)">
     <span class="piece">
-      {{ board[5] }}
+      {{ game.board[5] }}
     </span>
   </div>
 
-  <div id="cell-6" ng-class="{ fade: fade[6] }" class="cell bottom left {{ board[6] }}" 
+  <div id="cell-6" class="cell bottom left {{ game.board[6] }}" 
     data-ng-click="placePiece(6)">
     <span class="piece">
-      {{ board[6] }}
+      {{ game.board[6] }}
     </span>
   </div>
 
-  <div id="cell-7" ng-class="{ fade: fade[7] }" class="cell bottom center {{ board[7] }}" 
+  <div id="cell-7" class="cell bottom center {{ game.board[7] }}" 
     data-ng-click="placePiece(7)">
     <span class="piece">
-      {{ board[7] }}
+      {{ game.board[7] }}
     </span>
   </div>
 
-  <div id="cell-8" ng-class="{ fade: fade[8] }" class="cell bottom right {{ board[8] }}" 
+  <div id="cell-8" class="cell bottom right {{ game.board[8] }}" 
     data-ng-click="placePiece(8)">
     <span class="piece">
-      {{ board[8] }}
+      {{ game.board[8] }}
     </span>
   </div>
 </div>
-<div id="win-message" class="{{turn}}" data-ng-show="gameOver">
-  {{gameOverMessage}}
+<div id="win-message" class="{{ getMark(-1) }}" data-ng-show="game.gameOver">
+  {{game.gameOverMessage}}
 </div>
 <footer>
-  <button data-ng-show="gameOver" 
-          data-ng-click="resetBoard()">
+  <button data-ng-show="game.gameOver" data-ng-click="resetBoard()">
     Play again
   </button>
-  <h1 class="turn {{turn}}" data-ng-hide="gameOver">
-    {{turn | uppercase}}'s turn
+  <h1 class="turn {{game.turn}}" data-ng-hide="game.gameOver">
+    {{game.turn | uppercase}}'s turn
   </h1>
 </footer>

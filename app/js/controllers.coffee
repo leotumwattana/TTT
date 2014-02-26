@@ -1,4 +1,4 @@
-TTT = angular.module 'TTT', ['ngRoute']
+TTT = angular.module 'TTT', ['ngRoute', 'firebase']
 
 TTT.config ['$routeProvider',
   ($routeProvider) ->
@@ -11,8 +11,8 @@ TTT.config ['$routeProvider',
       }).otherwise({ redirectTo: '/' })
 ]
 
-TTT.controller 'BoardController', ['$scope',
-  ($scope) ->
+TTT.controller 'BoardController', ['$scope', '$firebase',
+  ($scope, $firebase) ->
 
     # Symbols for pieces
     O = 'o'
@@ -20,46 +20,50 @@ TTT.controller 'BoardController', ['$scope',
     $scope.O = O
     $scope.X = X
 
-    $scope.board = []
-    $scope.fade = []
+    # Firebase
+    gameRef = new Firebase "https://ttt-leo-tumwattana.firebaseIO.com/games"
+    $scope.game = $firebase(gameRef)
 
-    init = ->
-      $scope.turn = O
-      $scope.gameOver = false
-      $scope.gameOverMessage = ""
-    init()
+    $scope.setupGame = ->
+      $scope.game = {}
+      $scope.game.board = {}
+      $scope.game.turn = O
+      $scope.game.counter = 0
+      $scope.game.gameOver = false
+      $scope.game.gameOverMessage = ""
+      gameRef.update $scope.game
+    $scope.setupGame()
+
 
     $scope.resetBoard = ->
-      $scope.board = []
-      $scope.fade = []
-      $scope.gameOver = false
+      $scope.setupGame()
 
     $scope.getSplashBoard = ->
-      $scope.board = [ O, O, X,
-                       O, X, "",
-                       X, "", O]
+      $scope.game.board = [ O, O, X,
+                            O, X, "",
+                            X, "", O ]
 
     $scope.placePiece = (pos) ->
-
       # check if position is taken
-      if $scope.board[pos] == undefined
-        
+      if $scope.game.board[pos] == undefined
         # place piece on board
-        $scope.board[pos] = $scope.turn
-
+        $scope.game.board[pos] = getMark()
+        $scope.game.counter += 1
         if (isWon() || isBoardFull())
           if isWon()
-            $scope.gameOverMessage = $scope.turn.toUpperCase() + " WON!"
+            $scope.game.gameOverMessage = getMark(-1).toUpperCase() + " WON!"
           else
-            $scope.gameOverMessage = "It's a tie!"
-          $scope.gameOver = true
-        else
-          swapTurn()
+            $scope.game.gameOverMessage = "It's a tie!"
+          $scope.game.gameOver = true
+        gameRef.update $scope.game
       else
         console.log "Position taken!"
 
-    swapTurn = ->
-      $scope.turn = if $scope.turn == O then X else O
+    getMark = (offset) ->
+      offset ||= 0
+      if (($scope.game.counter + offset) % 2 == 0) then O else X
+
+    $scope.getMark = getMark
 
     isWon = ->
       checkSets = [[0,1,2],[3,4,5],[6,7,8],
@@ -68,17 +72,14 @@ TTT.controller 'BoardController', ['$scope',
 
       win = false
       for set in checkSets
-        console.log set
-        a = $scope.board[set[0]]
-        b = $scope.board[set[1]]
-        c = $scope.board[set[2]]
+        a = $scope.game.board[set[0]]
+        b = $scope.game.board[set[1]]
+        c = $scope.game.board[set[2]]
 
         if a != undefined && a == b && b == c
           win = true
       win
 
     isBoardFull = ->
-      $scope.board.filter (value) ->
-        value != undefined
-      .length == 9
+      $scope.game.counter == 9
 ]

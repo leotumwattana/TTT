@@ -2,7 +2,7 @@
 (function() {
   var TTT;
 
-  TTT = angular.module('TTT', ['ngRoute']);
+  TTT = angular.module('TTT', ['ngRoute', 'firebase']);
 
   TTT.config([
     '$routeProvider', function($routeProvider) {
@@ -19,58 +19,65 @@
   ]);
 
   TTT.controller('BoardController', [
-    '$scope', function($scope) {
-      var O, X, init, isBoardFull, isWon, swapTurn;
+    '$scope', '$firebase', function($scope, $firebase) {
+      var O, X, gameRef, getMark, isBoardFull, isWon;
       O = 'o';
       X = 'x';
       $scope.O = O;
       $scope.X = X;
-      $scope.board = [];
-      $scope.fade = [];
-      init = function() {
-        $scope.turn = O;
-        $scope.gameOver = false;
-        return $scope.gameOverMessage = "";
+      gameRef = new Firebase("https://ttt-leo-tumwattana.firebaseIO.com/games");
+      $scope.game = $firebase(gameRef);
+      $scope.setupGame = function() {
+        $scope.game = {};
+        $scope.game.board = {};
+        $scope.game.turn = O;
+        $scope.game.counter = 0;
+        $scope.game.gameOver = false;
+        $scope.game.gameOverMessage = "";
+        return gameRef.update($scope.game);
       };
-      init();
+      $scope.setupGame();
       $scope.resetBoard = function() {
-        $scope.board = [];
-        $scope.fade = [];
-        return $scope.gameOver = false;
+        return $scope.setupGame();
       };
       $scope.getSplashBoard = function() {
-        return $scope.board = [O, O, X, O, X, "", X, "", O];
+        return $scope.game.board = [O, O, X, O, X, "", X, "", O];
       };
       $scope.placePiece = function(pos) {
-        if ($scope.board[pos] === void 0) {
-          $scope.board[pos] = $scope.turn;
+        if ($scope.game.board[pos] === void 0) {
+          $scope.game.board[pos] = getMark();
+          $scope.game.counter += 1;
           if (isWon() || isBoardFull()) {
             if (isWon()) {
-              $scope.gameOverMessage = $scope.turn.toUpperCase() + " WON!";
+              $scope.game.gameOverMessage = getMark(-1).toUpperCase() + " WON!";
             } else {
-              $scope.gameOverMessage = "It's a tie!";
+              $scope.game.gameOverMessage = "It's a tie!";
             }
-            return $scope.gameOver = true;
-          } else {
-            return swapTurn();
+            $scope.game.gameOver = true;
           }
+          return gameRef.update($scope.game);
         } else {
           return console.log("Position taken!");
         }
       };
-      swapTurn = function() {
-        return $scope.turn = $scope.turn === O ? X : O;
+      getMark = function(offset) {
+        offset || (offset = 0);
+        if (($scope.game.counter + offset) % 2 === 0) {
+          return O;
+        } else {
+          return X;
+        }
       };
+      $scope.getMark = getMark;
       isWon = function() {
         var a, b, c, checkSets, set, win, _i, _len;
         checkSets = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
         win = false;
         for (_i = 0, _len = checkSets.length; _i < _len; _i++) {
           set = checkSets[_i];
-          console.log(set);
-          a = $scope.board[set[0]];
-          b = $scope.board[set[1]];
-          c = $scope.board[set[2]];
+          a = $scope.game.board[set[0]];
+          b = $scope.game.board[set[1]];
+          c = $scope.game.board[set[2]];
           if (a !== void 0 && a === b && b === c) {
             win = true;
           }
@@ -78,9 +85,7 @@
         return win;
       };
       return isBoardFull = function() {
-        return $scope.board.filter(function(value) {
-          return value !== void 0;
-        }).length === 9;
+        return $scope.game.counter === 9;
       };
     }
   ]);
