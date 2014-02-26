@@ -21,18 +21,16 @@ TTT.controller 'BoardController', ['$scope', '$firebase',
     $scope.X = X
 
     # Firebase
-    gameRef = new Firebase "https://ttt-leo-tumwattana.firebaseIO.com/games"
-    $scope.game = $firebase(gameRef)
+    gameRef = new Firebase "https://ttt-leo-tumwattana.firebaseIO.com/game"
 
     $scope.setupGame = ->
       $scope.game = {}
-      $scope.game.board = {}
+      $scope.game.board = {0:'',1:'',2:'',3:'',4:'',5:'',6:'',7:'',8:''}
       $scope.game.counter = 0
       $scope.game.gameOver = false
       $scope.game.gameOverMessage = ""
-      gameRef.update $scope.game
     $scope.setupGame()
-
+    $firebase(gameRef).$bind($scope, 'game')
 
     $scope.resetBoard = ->
       $scope.setupGame()
@@ -44,7 +42,7 @@ TTT.controller 'BoardController', ['$scope', '$firebase',
 
     $scope.placePiece = (pos) ->
       # check if position is taken
-      if $scope.game.board[pos] == undefined
+      if $scope.game.board[pos] == ''
         # place piece on board
         $scope.game.board[pos] = getMark()
         $scope.game.counter += 1
@@ -55,7 +53,6 @@ TTT.controller 'BoardController', ['$scope', '$firebase',
           else
             $scope.game.gameOverMessage = "It's a tie!"
           $scope.game.gameOver = true
-        gameRef.update $scope.game
       else
         console.log "Position taken!"
 
@@ -76,7 +73,7 @@ TTT.controller 'BoardController', ['$scope', '$firebase',
         b = $scope.game.board[set[1]]
         c = $scope.game.board[set[2]]
 
-        if a != undefined && a == b && b == c
+        if a != '' && a == b && b == c
           win = true
       win
 

@@ -25,17 +25,26 @@
       X = 'x';
       $scope.O = O;
       $scope.X = X;
-      gameRef = new Firebase("https://ttt-leo-tumwattana.firebaseIO.com/games");
-      $scope.game = $firebase(gameRef);
+      gameRef = new Firebase("https://ttt-leo-tumwattana.firebaseIO.com/game");
       $scope.setupGame = function() {
         $scope.game = {};
-        $scope.game.board = {};
+        $scope.game.board = {
+          0: '',
+          1: '',
+          2: '',
+          3: '',
+          4: '',
+          5: '',
+          6: '',
+          7: '',
+          8: ''
+        };
         $scope.game.counter = 0;
         $scope.game.gameOver = false;
-        $scope.game.gameOverMessage = "";
-        return gameRef.update($scope.game);
+        return $scope.game.gameOverMessage = "";
       };
       $scope.setupGame();
+      $firebase(gameRef).$bind($scope, 'game');
       $scope.resetBoard = function() {
         return $scope.setupGame();
       };
@@ -43,7 +52,7 @@
         return $scope.game.board = [O, O, X, O, X, "", X, "", O];
       };
       $scope.placePiece = function(pos) {
-        if ($scope.game.board[pos] === void 0) {
+        if ($scope.game.board[pos] === '') {
           $scope.game.board[pos] = getMark();
           $scope.game.counter += 1;
           if (isWon() || isBoardFull()) {
@@ -53,9 +62,8 @@
             } else {
               $scope.game.gameOverMessage = "It's a tie!";
             }
-            $scope.game.gameOver = true;
+            return $scope.game.gameOver = true;
           }
-          return gameRef.update($scope.game);
         } else {
           return console.log("Position taken!");
         }
@@ -78,7 +86,7 @@
           a = $scope.game.board[set[0]];
           b = $scope.game.board[set[1]];
           c = $scope.game.board[set[2]];
-          if (a !== void 0 && a === b && b === c) {
+          if (a !== '' && a === b && b === c) {
             win = true;
           }
         }
