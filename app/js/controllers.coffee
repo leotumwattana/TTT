@@ -27,7 +27,6 @@ TTT.controller 'BoardController', ['$scope', '$firebase',
     $scope.setupGame = ->
       $scope.game = {}
       $scope.game.board = {}
-      $scope.game.turn = O
       $scope.game.counter = 0
       $scope.game.gameOver = false
       $scope.game.gameOverMessage = ""

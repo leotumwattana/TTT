@@ -78,7 +78,7 @@
   <button data-ng-show="game.gameOver" data-ng-click="resetBoard()">
     Play again
   </button>
-  <h1 class="turn {{game.turn}}" data-ng-hide="game.gameOver">
-    {{game.turn | uppercase}}'s turn
+  <h1 class="turn {{ getMark() }}" data-ng-hide="game.gameOver">
+    {{ getMark() | uppercase }}'s turn
   </h1>
 </footer>

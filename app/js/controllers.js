@@ -30,7 +30,6 @@
       $scope.setupGame = function() {
         $scope.game = {};
         $scope.game.board = {};
-        $scope.game.turn = O;
         $scope.game.counter = 0;
         $scope.game.gameOver = false;
         $scope.game.gameOverMessage = "";
