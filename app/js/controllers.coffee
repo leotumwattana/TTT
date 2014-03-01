@@ -143,6 +143,9 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
       else
         false
 
+    $scope.isFindingOpponent = ->
+      if $scope.game then !$scope.game.player2? else true
+
     # ------------------------
 
     resetGame = ->

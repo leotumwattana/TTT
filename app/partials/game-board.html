@@ -88,4 +88,9 @@
       {{ getTurnMessage() }}
     </h1>
   </div>
+  <div data-ng-show="isFindingOpponent()">
+    <h1 class="{{ getMark() }}">
+      Finding opponent...
+    </h1>
+  </div>
 </footer>
