@@ -136,29 +136,6 @@ button:active {
   background-color: hsla(176, 55%, 50%, 0.9);
 }
 
-button.alert {
-  color: hsla(355, 100%, 95%, 0.9);
-  background-color: hsla(355, 63%, 56%, 0.9);
-  -webkit-box-shadow: 0 5px 0 0 hsla(355, 63%, 45%, 0.9);
-  box-shadow: 0 5px 0 0 hsla(355, 63%, 45%, 0.9);
-  -moz-border-radius:5px;
-  -webkit-border-radius:5px;
-  border-radius:5px;
-}
-
-button:hover.alert {
-  margin-top: 2px;
-  -webkit-box-shadow: 0 3px 0 0 hsla(355, 63%, 45%, 0.9);
-  box-shadow: 0 3px 0 0 hsla(355, 63%, 45%, 0.9);
-}
-
-button:active.alert {
-  margin-top: 4px;
-  -webkit-box-shadow: 0 -2px 0 0 hsla(355, 63%, 45%, 0.9);
-  box-shadow: 0 -2px 0 0 hsla(355, 63%, 45%, 0.9);
-  background-color: hsla(355, 63%, 56%, 0.9);
-}
-
 div.button-container {
   width: 150px;
   float: left;
@@ -170,6 +147,7 @@ div.container {
 }
 
 a {
+  width: 240px;
   font-size: 140%;
   font-weight: 600;
   color: hsla(176, 100%, 90%, 1.0);
@@ -183,13 +161,37 @@ a {
   border-radius:5px;
   text-decoration: none;
   display: inline-block;
-  width: 15%;
 }
 
 a:hover {
   margin-top: 2px;
   -webkit-box-shadow: 0 3px 0 0 hsla(176, 55%, 38%, 0.9);
   box-shadow: 0 3px 0 0 hsla(176, 55%, 38%, 0.9);
+}
+
+a.alert {
+  padding: 13px 20px;
+  
+  color: hsla(355, 100%, 95%, 0.9);
+  background-color: hsla(355, 63%, 56%, 0.9);
+  -webkit-box-shadow: 0 5px 0 0 hsla(355, 63%, 45%, 0.9);
+  box-shadow: 0 5px 0 0 hsla(355, 63%, 45%, 0.9);
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+}
+
+a:hover.alert {
+  margin-top: 2px;
+  -webkit-box-shadow: 0 3px 0 0 hsla(355, 63%, 45%, 0.9);
+  box-shadow: 0 3px 0 0 hsla(355, 63%, 45%, 0.9);
+}
+
+a:active.alert {
+  margin-top: 4px;
+  -webkit-box-shadow: 0 -2px 0 0 hsla(355, 63%, 45%, 0.9);
+  box-shadow: 0 -2px 0 0 hsla(355, 63%, 45%, 0.9);
+  background-color: hsla(355, 63%, 56%, 0.9);
 }
 
 #win-message {
