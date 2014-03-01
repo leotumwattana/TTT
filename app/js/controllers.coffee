@@ -165,7 +165,9 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
 
     getMark = (offset) ->
       offset ||= 0
-      if (($scope.game.counter + offset) % 2 == 0) then O else X
+      game = $scope.game || {}
+      counter = game.counter || 0
+      if (counter + offset) % 2 == 0 then O else X
 
     getTurnId = (offset) ->
       if getMark(offset) == O then $scope.game.player1 else $scope.game.player2
