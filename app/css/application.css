@@ -107,9 +107,10 @@ button {
   font-size: 130%;
   font-weight: 600;
   color: hsla(176, 100%, 90%, 1.0);
+  
+  width: 90%;
   border: 0;
-  padding: 10px 12px;
-  /*margin: 0 15px;*/
+  padding: 10px 20px;
 
   background-color: hsla(176, 55%, 56%, 0.9);
   -webkit-box-shadow: 0 5px 0 0 hsla(176, 55%, 38%, 0.9);
@@ -159,12 +160,12 @@ button:active.alert {
 }
 
 div.button-container {
-  width: 130px;
+  width: 150px;
   float: left;
 }
 
 div.container {
-  width: 260px;
+  width: 300px;
   margin: 0 auto;
 }
 
