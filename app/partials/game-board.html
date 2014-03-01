@@ -75,16 +75,12 @@
   {{game.gameOverMessage}}
 </div>
 <footer>
-  <div class="container">
-    <div class="button-container" data-ng-show="game.gameOver">
-      <button data-ng-click="resetGame()">
-        Rematch
-      </button>
+  <div class="buttons-container" data-ng-show="game.gameOver">
+    <div class="button-container">
+      <button data-ng-click="resetGame()">Rematch</button>
     </div>
-    <div class="button-container" data-ng-show="game.gameOver">
-      <a class="alert" href="#">
-        Leave
-      </a>
+    <div class="button-container">
+      <a class="alert" href="#">Leave</a>
     </div>
   </div>
   <h1 class="turn {{ getMark() }}" data-ng-hide="game.gameOver">
