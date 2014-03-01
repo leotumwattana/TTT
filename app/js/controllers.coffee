@@ -137,6 +137,12 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
 
     joinOrCreateOpenGame()
 
+    $scope.showTurn = ->
+      if $scope.game
+        $scope.game.player2? && !$scope.game.gameOver
+      else
+        false
+
     # ------------------------
 
     resetGame = ->

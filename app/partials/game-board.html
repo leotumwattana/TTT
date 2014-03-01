@@ -83,7 +83,9 @@
       <a class="alert" href="#">Leave</a>
     </div>
   </div>
-  <h1 class="turn {{ getMark() }}" data-ng-hide="game.gameOver">
-    {{ getTurnMessage() }}
-  </h1>
+  <div class="turn-message" data-ng-show="showTurn()">
+    <h1 class="turn {{ getMark() }}">
+      {{ getTurnMessage() }}
+    </h1>
+  </div>
 </footer>
