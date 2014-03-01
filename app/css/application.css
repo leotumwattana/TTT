@@ -171,7 +171,7 @@ a:hover {
 
 a.alert {
   padding: 13px 20px;
-  
+  width: 90%;
   color: hsla(355, 100%, 95%, 0.9);
   background-color: hsla(355, 63%, 56%, 0.9);
   -webkit-box-shadow: 0 5px 0 0 hsla(355, 63%, 45%, 0.9);
