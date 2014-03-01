@@ -137,7 +137,7 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
 
     joinOrCreateOpenGame()
 
-    $scope.isGameOn = ->
+    isGameOn = ->
       if $scope.game
         $scope.game.player2? && !$scope.game.gameOver
       else
@@ -155,7 +155,7 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
       $scope.game.gameOverMessage = ""
 
     $scope.placePiece = (pos) ->
-      # if playerId == getTurnId()
+      if playerId == getTurnId() && isGameOn()
         # check if position is taken
         if $scope.game.board[pos] == ''
           # place piece on board
@@ -208,4 +208,5 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
     $scope.getMark = getMark
     $scope.resetGame = resetGame
     $scope.getTurnMessage = getTurnMessage
+    $scope.isGameOn = isGameOn
 ]
