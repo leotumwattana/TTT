@@ -50,7 +50,9 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
       $scope.game.player2 = null
       $scope.game.counter = 0
       $scope.game.gameOver = false
-      $scope.game.gameOverMessage = ""
+      $scope.game.won = false
+      $scope.game.tie = false
+
 
       # Bind game object to Firebase
       $firebase(gameRef).$bind($scope, 'game').then (unbind) ->
@@ -148,11 +150,21 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
 
     # ------------------------
 
+
+
+
+    # ------------------------
+
     resetGame = ->
       $scope.game.board = {0:'',1:'',2:'',3:'',4:'',5:'',6:'',7:'',8:''}
       $scope.game.counter = 0
       $scope.game.gameOver = false
-      $scope.game.gameOverMessage = ""
+      $scope.game.won = false
+      $scope.game.tie = false
+
+    getTurnId = (offset) ->
+      game = $scope.game || {}
+      if getMark(offset) == O then game.player1 else game.player2
 
     $scope.placePiece = (pos) ->
       if playerId == getTurnId() && isGameOn()
@@ -164,23 +176,21 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
           if (isWon() || isBoardFull())
             if isWon()
               $scope.game.counter -= 1
-              message = if getTurnId() == playerId then "You WON!" else "You Lost."
-              $scope.game.gameOverMessage = message
+              $scope.game.won = true
             else
-              $scope.game.gameOverMessage = "It's a tie!"
+              $scope.game.tie = true
             $scope.game.gameOver = true
         else
           console.log "Position taken!"
+
+    $scope.getGameOverMessage = ->
+      if getTurnId() == playerId then "You WON!" else "You Lost."
 
     getMark = (offset) ->
       offset ||= 0
       game = $scope.game || {}
       counter = game.counter || 0
       if (counter + offset) % 2 == 0 then O else X
-
-    getTurnId = (offset) ->
-      game = $scope.game || {}
-      if getMark(offset) == O then game.player1 else game.player2
 
     getTurnMessage = ->
       if playerId == getTurnId() then "Your turn!" else "Opponent's turn"

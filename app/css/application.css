@@ -194,7 +194,7 @@ a:active.alert {
   background-color: hsla(355, 63%, 56%, 0.9);
 }
 
-#win-message {
+.game-over-message {
   margin-top: -20px;
   margin-bottom: 20px;
   font-size: 400%;
