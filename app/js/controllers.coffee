@@ -31,13 +31,11 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
       gamesRef.push().name()
 
     playerId = generateName()
-    gameId = ''
-    gameRef = ''
 
     # creates new game in firebase and returns game id
-    createGame = ->
+    createGame = (gameId) ->
 
-      gameId = 'game' + generateName()
+      $scope.gameId = gameId
       gameRef = gamesRef.child gameId
 
       # If game is already bound then unbind it
@@ -53,107 +51,51 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
       $scope.game.won = false
       $scope.game.tie = false
 
-
       # Bind game object to Firebase
       $firebase(gameRef).$bind($scope, 'game').then (unbind) ->
         $scope.unbind = unbind
 
-      gameId
-
-    # lists a game as available in firebase
-    listAsOpenGame = (gameId) ->
-      $firebase(openGamesRef).$add(gameId).then (ref) ->
-        $scope.openGameId = ref.name()
-
-    # creates and list game as open
-    $scope.createAndListGame = ->
-      gameId = createGame()
-      listAsOpenGame gameId
-
-    unlistOpenGame = (openGameId) ->
-      $firebase(openGamesRef).$remove(openGameId)
-
-    # read in list of open game ids
-    getOpenGames = (onComplete) ->
-      openGamesRef.once 'value', (snapshot) ->
-        openGameIds = []
-        for key, gameId of snapshot.val()
-          openGameIds.push [key, gameId]
-        onComplete(openGameIds)
-
     # binds game object with firebase
-    bindGame = (gid) ->
-
-      # unbind the game object if it was already bound
+    bindGame = (gameId) ->
       $scope.unbind() if $scope.unbind
-      gameId = gid
-      gameRef = gamesRef.child gid
+      gameRef = gamesRef.child gameId
       $firebase(gameRef).$bind($scope, 'game').then (unbind) ->
         $scope.unbind = unbind
-      gid
+      gameId
 
-    @joinGame = (gameId, options) ->
-      options ||= {}
+    joinGame = (gameId) ->
+      player2Ref = gamesRef.child "#{gameId}/player2"
+      player2Ref.set playerId
+      bindGame gameId
 
-      url = "https://ttt-leo-tumwattana.firebaseIO.com/games/#{gameId}/player2"
-      player2Ref = new Firebase url
-      
-      player2Ref.transaction (player2) ->
-        if !player2
-          player2 = playerId
+    startGame = ->
+      openGamesRef.transaction (gameId) ->
+        if gameId
+          $scope.gameId = gameId
+          null
         else
-          return
+          'game' + generateName()
       , (error, committed, snapshot) ->
         if committed && !error
-          # bind game object
-          options.onSuccess() if options.onSuccess
-        else
-          if error
-            options.onError() if options.onError
-          if !committed
-            options.onGameFull() if options.onGameFull
-
-    joinOrCreateOpenGame = =>
-      getOpenGames (openGameIds) =>
-
-        tryToJoinOpenGame = =>
-          pair = openGameIds.shift()
-          if pair
-            openGameKey = pair[0]
-            gameId = pair[1]
-            console.log "Trying to join game: #{gameId}"
-            @joinGame gameId,
-              onGameFull: ->
-                console.log "Game is full: #{gameId}"
-                tryToJoinOpenGame()
-              onSuccess: ->
-                console.log "Joined game: #{gameId}"
-                bindGame gameId
-                console.log "Unlisting game: #{gameId}"
-                unlistOpenGame openGameKey
+          gameId = snapshot.val()
+          if gameId
+            # create game
+            createGame gameId
           else
-            console.log "No more open games to join..."
-            console.log "Creating a game..."
-            $scope.createAndListGame()
-        tryToJoinOpenGame()
-
-    joinOrCreateOpenGame()
+            # joining game
+            joinGame $scope.gameId
+        else
+          console.log "There was an error starting game: #{error}"
+    startGame()
 
     isGameOn = ->
       if $scope.game
-        $scope.game.player2? && !$scope.game.gameOver
+        $scope.game.player2? && !$scope.game.gameOver && $scope.unbind
       else
         false
 
     $scope.isFindingOpponent = ->
       if $scope.game then !$scope.game.player2? else true
-
-    # ------------------------
-
-
-
-
-    # ------------------------
 
     resetGame = ->
       $scope.game.board = {0:'',1:'',2:'',3:'',4:'',5:'',6:'',7:'',8:''}
