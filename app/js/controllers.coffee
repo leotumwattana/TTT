@@ -51,6 +51,10 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
       $scope.game.won = false
       $scope.game.tie = false
 
+      # if player disconnects
+      player1Ref = gameRef.child "player1"
+      player1Ref.onDisconnect().set 'disconnected'
+
       # Bind game object to Firebase
       $firebase(gameRef).$bind($scope, 'game').then (unbind) ->
         $scope.unbind = unbind
@@ -66,7 +70,15 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
     joinGame = (gameId) ->
       player2Ref = gamesRef.child "#{gameId}/player2"
       player2Ref.set playerId
+      player2Ref.onDisconnect().set 'disconnected'
       bindGame gameId
+
+    $scope.opponentDisconnected = ->
+      game = $scope.game || {}
+      game.player1 == 'disconnected' || game.player2 == 'disconnected'
+
+    $scope.leaveGame = ->
+      location.href = "/"
 
     startGame = ->
       openGamesRef.transaction (gameId) ->

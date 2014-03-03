@@ -72,28 +72,33 @@
 </div>
 
 <footer>
-  <div id="win-message" class="{{ getMark() }} game-over-message" data-ng-show="game.won">
+
+  <div id="win-message" class="{{ getMark() }} large-message" data-ng-show="game.won">
     {{ getGameOverMessage() }}
   </div>
-  <div id="tie-message" class="{{ getMark() }} game-over-message" data-ng-show="game.tie">
+
+  <div id="tie-message" class="{{ getMark() }} large-message" data-ng-show="game.tie">
     It's a tie.
   </div>
-  <div class="buttons-container" data-ng-show="game.gameOver">
-    <div class="button-container">
+
+  <div class="small-message {{ getMark() }}" data-ng-show="opponentDisconnected()">
+    Opponent Disconnected
+  </div>
+
+  <div class="small-message {{ getMark() }}" data-ng-show="isGameOn() && !opponentDisconnected()">
+    {{ getTurnMessage() }}
+  </div>
+
+  <div class="small-message {{ getMark() }}" data-ng-show="isFindingOpponent()">
+    Finding opponent...
+  </div>
+
+  <div class="buttons-container">
+    <div class="button-container" data-ng-show="game.gameOver">
       <button data-ng-click="resetGame()">Rematch</button>
     </div>
-    <div class="button-container">
-      <a class="alert" href="#">Leave</a>
+    <div class="button-container" data-ng-show="game.gameOver || opponentDisconnected()">
+      <button class="alert" data-ng-click="leaveGame()">Leave</button>
     </div>
-  </div>
-  <div class="turn-message" data-ng-show="isGameOn()">
-    <h1 class="turn {{ getMark() }}">
-      {{ getTurnMessage() }}
-    </h1>
-  </div>
-  <div data-ng-show="isFindingOpponent()">
-    <h1 class="{{ getMark() }}">
-      Finding opponent...
-    </h1>
   </div>
 </footer>
