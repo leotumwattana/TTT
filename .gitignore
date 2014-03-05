@@ -1,2 +1,4 @@
-*.js
+controllers.js
+application.js
+animations.js
 *.map
