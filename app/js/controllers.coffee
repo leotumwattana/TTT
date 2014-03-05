@@ -100,6 +100,17 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
           console.log "There was an error starting game: #{error}"
     startGame()
 
+    cleanOldGames = ->
+      gamesRef.once 'value', (games) ->
+        games.forEach (game) ->
+          gameVal = game.val()
+          if gameVal.player1 == "disconnected" && gameVal.player2 == "disconnected"
+            gameRef = game.ref()
+            console.log "This is an old game: " + gameRef
+            gameRef.remove()
+
+    cleanOldGames()
+
     isGameOn = ->
       if $scope.game
         $scope.game.player2? && !$scope.game.gameOver && $scope.unbind
