@@ -35,7 +35,6 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
     # creates new game in firebase and returns game id
     createGame = (gameId) ->
 
-      $scope.gameId = gameId
       gameRef = gamesRef.child gameId
 
       # If game is already bound then unbind it
@@ -63,7 +62,8 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
     bindGame = (gameId) ->
       $scope.unbind() if $scope.unbind
       gameRef = gamesRef.child gameId
-      $firebase(gameRef).$bind($scope, 'game').then (unbind) ->
+      $firebase(gameRef)
+      .$bind($scope, 'game').then (unbind) ->
         $scope.unbind = unbind
       gameId
 
@@ -106,9 +106,7 @@ ttt.controller 'BoardController', ['$scope', '$firebase',
           gameVal = game.val()
           if gameVal.player1 == "disconnected" && gameVal.player2 == "disconnected"
             gameRef = game.ref()
-            console.log "This is an old game: " + gameRef
             gameRef.remove()
-
     cleanOldGames()
 
     isGameOn = ->
